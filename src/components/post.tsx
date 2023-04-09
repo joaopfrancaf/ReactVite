@@ -1,4 +1,5 @@
-import { StyledArticle, StyledDivAuthor, StyledDivAuthorInfo, StyledDivContent, StyledDivHeader, StyledForm } from "../styles/components/post";
+import { StyledArticle, StyledDivAuthor, StyledDivAuthorInfo, StyledDivContent, StyledDivHeader, StyledDivListComments, StyledForm } from "../styles/components/post";
+import Comment from "./comment";
 
 export default function Post() {
     return (
@@ -26,6 +27,12 @@ export default function Post() {
 
                 <footer><button type="submit">Publicar</button></footer>
             </StyledForm>
+
+            <StyledDivListComments>
+                <Comment />
+                <Comment />
+                <Comment />
+            </StyledDivListComments>
         </StyledArticle>
     )
 }

@@ -23,6 +23,8 @@ export const {
 
       green300: '#00B37E',
       green500: '#00875f',
+
+      red500: '#F75A68',
     },
   },
 });

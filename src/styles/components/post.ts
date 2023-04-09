@@ -114,6 +114,8 @@ export const StyledForm = styled('form', {
             background: '$green300',
         },
     },
+})
 
-
+export const StyledDivListComments = styled('div', {
+    marginTop: '2rem'
 })
