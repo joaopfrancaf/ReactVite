@@ -19,14 +19,6 @@ export const StyledDivProfile = styled('div', {
 
     marginTop: 'calc(0px - 1.5rem - 6px)',
 
-    img: {
-        width: 'calc(3rem + 12px)',
-        height: 'calc(3rem + 12px)',
-        borderRadius: 8,
-        border: '4px solid &gray800',
-        outline: '2px solid $green500',
-    },
-
     strong: {
         marginTop: '1rem',
         color: '$gray100',

@@ -1,4 +1,5 @@
 import { StyledArticle, StyledDivAuthor, StyledDivAuthorInfo, StyledDivContent, StyledDivHeader, StyledDivListComments, StyledForm } from "../styles/components/post";
+import Avatar from "./avatar";
 import Comment from "./comment";
 
 export default function Post() {
@@ -6,7 +7,7 @@ export default function Post() {
         <StyledArticle>
             <StyledDivHeader>
                 <StyledDivAuthor>
-                    <img src="https://avatars.githubusercontent.com/u/78824866?v=4"/>
+                    <Avatar src="https://github.com/diego3g.png" hasBorder={true} />
                     <StyledDivAuthorInfo>
                         <strong>João Pedro França Freitas</strong>
                         <span>Full - Stack</span>

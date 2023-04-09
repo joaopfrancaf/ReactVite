@@ -22,14 +22,6 @@ export const StyledDivAuthor = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-
-    img: {
-        width: 'calc(3rem + 12px)',
-        height: 'calc(3rem + 12px)',
-        borderRadius: 8,
-        border: '4px solid &gray800',
-        outline: '2px solid $green500',
-    }
 })
 
 export const StyledDivAuthorInfo = styled('div', {

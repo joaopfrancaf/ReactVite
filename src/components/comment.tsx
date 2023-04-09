@@ -1,11 +1,12 @@
 import Trash from "@phosphor-icons/react/dist/icons/Trash";
 import { StyledDivAuthorAndTime, StyledDivComment, StyledDivCommentBox, StyledDivCommentContent } from "../styles/components/comment";
 import ThumbsUp from "@phosphor-icons/react/dist/icons/ThumbsUp";
+import Avatar from "./avatar";
 
 export default function Comment() {
     return (
     <StyledDivComment>
-      <img src="https://github.com/diego3g.png" alt="" />
+      <Avatar hasBorder={false} src="https://github.com/diego3g.png" />
 
       <StyledDivCommentBox>
         <StyledDivCommentContent>
