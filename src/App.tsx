@@ -1,4 +1,5 @@
 import Header from "./components/header"
+import Post from "./components/post"
 import Sidebar from "./components/sidebar"
 import { StyledDivWrapper } from "./styles/pages/app"
 
@@ -9,7 +10,7 @@ function App() {
 
       <StyledDivWrapper>
         <Sidebar/>
-        <main></main>
+        <main><Post/></main>
       </StyledDivWrapper>
     </>
   )
