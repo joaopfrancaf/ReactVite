@@ -1,8 +1,17 @@
+import { useEffect, useState } from "react";
 import { StyledArticle, StyledDivAuthor, StyledDivAuthorInfo, StyledDivContent, StyledDivHeader, StyledDivListComments, StyledForm } from "../styles/components/post";
 import Avatar from "./avatar";
 import Comment from "./comment";
+import axios from "axios";
 
-export default function Post() {
+interface propsType {
+    author: string,
+    content: string,
+    publishedAt: Date,
+}
+
+export default function Post({...props}: propsType) {
+
     return (
         <StyledArticle>
             <StyledDivHeader>
