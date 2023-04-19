@@ -1,48 +1,135 @@
-import { useEffect, useState } from "react";
-import { StyledArticle, StyledDivAuthor, StyledDivAuthorInfo, StyledDivContent, StyledDivHeader, StyledDivListComments, StyledForm } from "../styles/components/post";
+import {
+  ChangeEvent,
+  FormEvent,
+  InvalidEvent,
+  useEffect,
+  useState,
+} from "react";
+import {
+  StyledArticle,
+  StyledDivAuthor,
+  StyledDivAuthorInfo,
+  StyledDivContent,
+  StyledDivHeader,
+  StyledDivListComments,
+  StyledForm,
+} from "../styles/components/post";
 import Avatar from "./avatar";
 import Comment from "./comment";
 import axios from "axios";
 
-interface propsType {
-    author: string,
-    content: string,
-    publishedAt: Date,
+interface Author {
+  name: string;
+  role: string;
+  avatarUrl: string;
 }
 
-export default function Post({...props}: propsType) {
+interface Content {
+  type: "paragraph" | "link";
+  content: string;
+}
 
-    return (
-        <StyledArticle>
-            <StyledDivHeader>
-                <StyledDivAuthor>
-                    <Avatar src="https://github.com/diego3g.png" hasBorder={true} />
-                    <StyledDivAuthorInfo>
-                        <strong>João Pedro França Freitas</strong>
-                        <span>Full - Stack</span>
-                    </StyledDivAuthorInfo>
-                </StyledDivAuthor>
+export interface PostType {
+  id: number;
+  author: Author;
+  publishedAt: Date;
+  content: Content[];
+}
 
-                <time title="11 de maio" dateTime="2023-05-11 08:00">Publicado a 1h</time>
-            </StyledDivHeader>
+interface PostProps {
+  post: PostType;
+}
 
-            <StyledDivContent>
-                <p>asdasdfgfbhgbhg</p>
-            </StyledDivContent>
+export default function Post({ post }: PostProps) {
+  const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
 
-            <StyledForm>
-                <strong>Deixe seu feedback</strong>
+  const [newCommentText, setNewCommentText] = useState("");
 
-                <textarea placeholder="deixe um comment"/>
+  function handleCrateNewComment(event: FormEvent) {
+    event.preventDefault();
 
-                <footer><button type="submit">Publicar</button></footer>
-            </StyledForm>
+    setComments([...comments, newCommentText]);
+    setNewCommentText("");
+  }
 
-            <StyledDivListComments>
-                <Comment />
-                <Comment />
-                <Comment />
-            </StyledDivListComments>
-        </StyledArticle>
-    )
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("");
+    setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
+    event.target.setCustomValidity("Esse campo é obrigatório!");
+  }
+
+  function deleteComment(commentToDelete: string) {
+    const commentsWithoutDeletedOne = comments.filter((comment) => {
+      return comment !== commentToDelete;
+    });
+
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
+  return (
+    <StyledArticle>
+      <StyledDivHeader>
+        <StyledDivAuthor>
+          <Avatar src={post.author.avatarUrl} hasBorder={true} />
+          <StyledDivAuthorInfo>
+            <strong>{post.author.name}</strong>
+            <span>{post.author.role}</span>
+          </StyledDivAuthorInfo>
+        </StyledDivAuthor>
+
+        <time title="11 de maio" dateTime="2023-05-11 08:00">
+          Publicado a 1h
+        </time>
+      </StyledDivHeader>
+
+      <StyledDivContent>
+        {post.content.map((line) => {
+          if (line.type === "paragraph") {
+            return <p key={line.content}>{line.content}</p>;
+          } else if (line.type === "link") {
+            return (
+              <p key={line.content}>
+                <a href="#">{line.content}</a>
+              </p>
+            );
+          }
+        })}
+      </StyledDivContent>
+
+      <StyledForm>
+        <strong>Deixe seu feedback</strong>
+
+        <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
+        />
+
+        <footer>
+          <button type="submit" disabled={isNewCommentEmpty}>
+            Publicar
+          </button>
+        </footer>
+      </StyledForm>
+
+      <StyledDivListComments>
+        {comments.map((comment) => {
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          );
+        })}
+      </StyledDivListComments>
+    </StyledArticle>
+  );
 }

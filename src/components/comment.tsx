@@ -1,10 +1,32 @@
 import Trash from "@phosphor-icons/react/dist/icons/Trash";
-import { StyledDivAuthorAndTime, StyledDivComment, StyledDivCommentBox, StyledDivCommentContent } from "../styles/components/comment";
+import {
+  StyledDivAuthorAndTime,
+  StyledDivComment,
+  StyledDivCommentBox,
+  StyledDivCommentContent,
+} from "../styles/components/comment";
 import ThumbsUp from "@phosphor-icons/react/dist/icons/ThumbsUp";
 import Avatar from "./avatar";
+import { useState } from "react";
 
-export default function Comment() {
-    return (
+interface CommentProps {
+  content: string;
+  onDeleteComment: (comment: string) => void;
+}
+
+export default function Comment({ content, onDeleteComment }: CommentProps) {
+  const [likeCount, setLikeCount] = useState(0);
+
+  function handleDeleteComment() {
+    onDeleteComment(content);
+  }
+
+  function handleLikeComment() {
+    setLikeCount((state) => {
+      return state + 1;
+    });
+  }
+  return (
     <StyledDivComment>
       <Avatar hasBorder={false} src="https://github.com/diego3g.png" />
 
@@ -13,24 +35,26 @@ export default function Comment() {
           <header>
             <StyledDivAuthorAndTime>
               <strong>Diego Fernandes</strong>
-              <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:00">Cerca de 1h atrás</time>
+              <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:00">
+                Cerca de 1h atrás
+              </time>
             </StyledDivAuthorAndTime>
 
-            <button title="Deletar comentário">
+            <button onClick={handleDeleteComment} title="Deletar comentário">
               <Trash size={24} />
             </button>
           </header>
 
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{content}</p>
         </StyledDivCommentContent>
 
         <footer>
-          <button>
+          <button onClick={handleLikeComment}>
             <ThumbsUp />
-            Aplaudir <span>20</span>
+            Aplaudir <span>{likeCount}</span>
           </button>
         </footer>
       </StyledDivCommentBox>
     </StyledDivComment>
-    )
+  );
 }
