@@ -20,5 +20,9 @@ export const globaStyles = globalCss ({
         fontSize: '1rem'
     },
 
+    ':focus': {
+        outline: 'transparent',
+        boxShadow: '0 0 0 2px $green500',
+    }
     
 })

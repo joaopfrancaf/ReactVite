@@ -8,5 +8,9 @@ export const StyledDivWrapper = styled('div', {
     display: 'grid',
     gridTemplateColumns: '256px 1fr',
     gap: '2rem',
-    alignItems: 'flex-start' //flex-start faz ficarem em cima
+    alignItems: 'flex-start', //flex-start faz ficarem em cima
+
+    '@media (max-width: 768px)': {
+        gridTemplateColumns: '1fr',
+    }
 })
