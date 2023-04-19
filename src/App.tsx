@@ -46,8 +46,6 @@ const posts: PostType[] = [
 ];
 
 function App() {
-  console.log(posts);
-
   return (
     <>
       <Header />

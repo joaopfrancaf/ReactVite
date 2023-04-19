@@ -100,7 +100,7 @@ export default function Post({ post }: PostProps) {
         })}
       </StyledDivContent>
 
-      <StyledForm>
+      <StyledForm onSubmit={handleCrateNewComment}>
         <strong>Deixe seu feedback</strong>
 
         <textarea
