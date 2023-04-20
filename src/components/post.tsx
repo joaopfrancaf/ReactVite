@@ -40,14 +40,10 @@ interface PostProps {
   post: PostType;
 }
 
-interface comment {
-  comment: string[];
-}
-
 export default function Post({ post }: PostProps) {
-  const [comments, setComments] = useState<any[]>([]);
+  const [comments, setComments] = useState<string[]>([]);
 
-  const [newCommentText, setNewCommentText] = useState<any>("");
+  const [newCommentText, setNewCommentText] = useState<string>("");
 
   function handleCrateNewComment(event: FormEvent) {
     event.preventDefault();
