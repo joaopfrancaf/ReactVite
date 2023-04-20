@@ -22,9 +22,7 @@ export default function Comment({ content, onDeleteComment }: CommentProps) {
   }
 
   function handleLikeComment() {
-    setLikeCount((state) => {
-      return state + 1;
-    });
+    setLikeCount(likeCount + 1);
   }
   return (
     <StyledDivComment>
